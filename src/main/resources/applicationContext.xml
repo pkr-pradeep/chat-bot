@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder location="db.properties"/>
+	
+	<bean id="catMiniResponseVO" class="com.catmini.response.vo.CatMiniResponseVO">
+	</bean>
+
+	<bean id="catMIniDataConnectionImplDev" class="com.catmini.dao.CatMiniDataConnectionImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplateDev"></property>
+	</bean>
+	
+	<bean id="jdbcTemplateDev" class="org.springframework.jdbc.core.JdbcTemplate">
+         <property name="dataSource" ref="dataSourceDev"/>
+     </bean>
+     
+      <bean id="dataSourceDev"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${driverClass}" />
+        <property name="url" value="${dev.url}" />
+        <property name="username" value="${dev.username}" />
+        <property name="password" value="${dev.password}" />
+     </bean>
+     
+     <bean id="catMIniDataConnectionImplQaa" class="com.catmini.dao.CatMiniDataConnectionImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplateQaa"></property>
+	</bean>
+	
+	<bean id="jdbcTemplateQaa" class="org.springframework.jdbc.core.JdbcTemplate">
+         <property name="dataSource" ref="dataSourceQaa"/>
+     </bean>
+     
+      <bean id="dataSourceQaa"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${driverClass}" />
+        <property name="url" value="${qaa.url}" />
+        <property name="username" value="${qaa.username}" />
+        <property name="password" value="${qaa.password}" />
+     </bean>
+</beans>
